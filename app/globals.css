@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Font */
+@import "@fontsource-variable/inter/index.css";
+
+@font-face {
+  font-family: "SpaceGroteskVF";
+  src: url("/fonts/SpaceGrotesk-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* === Global Resets & Theme === */
+body {
+  @apply font-sans bg-black text-white antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  @apply px-6 md:px-10 py-24;
+}
+
+h1, h2, h3 {
+  @apply font-bold text-white;
+}
+
+p {
+  @apply text-gray-400;
+}
+
+/* Marquee Animations */
+@layer base {
+  @keyframes scrollMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+
+  .animate-marquee {
+    animation: scrollMarquee 25s linear infinite;
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: blur(120px);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.15);
+    filter: blur(140px);
+    opacity: 0.35;
+  }
+}
+
+.animate-glowPulse {
+  animation: glowPulse 12s ease-in-out infinite;
+}
