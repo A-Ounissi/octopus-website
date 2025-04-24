@@ -61,8 +61,15 @@ export default function ProgressBar() {
         
         {/* Filled progress line - positioned to match background line */}
         <motion.div 
-          className="absolute top-[6px] left-1/2 transform -translate-x-1/2 w-0.5 bg-white/40 rounded-full origin-top"
           style={{ 
+            position: 'absolute',
+            top: '6px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '2px',
+            backgroundColor: 'rgba(255, 255, 255, 0.4)',
+            borderRadius: '9999px',
+            transformOrigin: 'top',
             height: `calc(${progressPercentage}% * (100% - 12px) / 100)`,
             maxHeight: 'calc(100% - 12px)'
           }}
@@ -81,48 +88,61 @@ export default function ProgressBar() {
             const isPassed = index <= activeIndex;
             
             return (
-              <motion.a
+              <a
                 key={section.id}
                 href={`#${section.id}`}
-                className="group flex items-center justify-center"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.2 }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
               >
-                {/* Enhanced tooltip */}
-                <motion.div 
-                  className="absolute left-8 opacity-0 group-hover:opacity-100 
-                           bg-black/60 backdrop-blur-sm border border-white/10
-                           px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap"
-                  initial={{ x: -5, opacity: 0 }}
-                  whileHover={{ x: 0, opacity: 1 }}
+                <motion.div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                  whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {section.name}
+                  {/* Enhanced tooltip */}
+                  <motion.div 
+                    style={{
+                      position: 'absolute',
+                      left: '2rem',
+                      opacity: 0,
+                      backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                      backdropFilter: 'blur(4px)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      padding: '0.375rem 0.75rem',
+                      borderRadius: '0.375rem',
+                      fontSize: '0.75rem',
+                      fontWeight: 500,
+                      whiteSpace: 'nowrap'
+                    }}
+                    initial={{ x: -5, opacity: 0 }}
+                    whileHover={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {section.name}
+                  </motion.div>
+                  
+                  {/* Dot with enhanced active state */}
+                  <motion.div
+                    style={{
+                      width: '12px',
+                      height: '12px',
+                      borderRadius: '50%',
+                      backgroundColor: isActive ? 'white' : isPassed ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.1)',
+                      border: isActive ? '2px solid white' : 'none',
+                      transition: 'all 0.3s ease'
+                    }}
+                    whileHover={{ scale: 1.2 }}
+                    transition={{ duration: 0.2 }}
+                  />
                 </motion.div>
-                
-                {/* Enhanced dot with subtle pulse for active */}
-                <motion.div
-                  className={`relative z-10 flex items-center justify-center rounded-full transition-all duration-300 
-                    ${isLast && isActive 
-                      ? 'w-3 h-3 bg-white' 
-                      : isLast 
-                        ? 'w-2.5 h-2.5 bg-white/70' 
-                        : isActive 
-                          ? 'w-2 h-2 bg-white' 
-                          : isPassed
-                            ? 'w-1.5 h-1.5 bg-white/60'
-                            : 'w-1.5 h-1.5 bg-white/20 hover:bg-white/40'
-                    }`}
-                  animate={isActive ? {
-                    scale: [1, 1.1, 1],
-                    transition: { 
-                      duration: 2,
-                      repeat: Infinity,
-                      repeatType: "reverse"
-                    }
-                  } : {}}
-                />
-              </motion.a>
+              </a>
             );
           })}
         </div>
