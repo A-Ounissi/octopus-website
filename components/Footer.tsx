@@ -41,7 +41,7 @@ export default function Footer() {
           <p className="text-gray-400 text-sm">
             Currently onboarding privately. <br />
             <Link href="https://cal.com/octopus-automations" target="_blank" className="underline hover:text-white">
-              Reach out to connect →
+              octopus@pulpoid.com
             </Link>
           </p>
         </div>
