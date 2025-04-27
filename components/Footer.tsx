@@ -39,7 +39,6 @@ export default function Footer() {
         <div className="space-y-4">
           <h4 className="font-semibold text-white mb-4 text-sm uppercase tracking-widest">Contact</h4>
           <p className="text-gray-400 text-sm">
-            Currently onboarding privately. <br />
             <Link href="https://cal.com/octopus-automations" target="_blank" className="underline hover:text-white">
               octopus@pulpoid.com
             </Link>
